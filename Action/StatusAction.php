@@ -20,6 +20,11 @@ class StatusAction implements ActionInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
+        if($model['error']) {
+            $request->markFailed();
+            return;
+        }
+
         if (false == $model['status'] && false == $model['card']) {
             $request->markNew();
 
